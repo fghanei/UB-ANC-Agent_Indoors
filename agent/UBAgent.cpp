@@ -110,7 +110,7 @@ void UBAgent::vehicleRemovedEvent(Vehicle* mav) {
 
 void UBAgent::armedChangedEvent(bool armed) {
     if (!armed) {
-        if (m_mission_state!=STATE_LAND) { //do not interfere lnding procedure.
+        if (m_mission_state!=STATE_LAND) { //do not interfere landing procedure.
             m_mission_state = STATE_IDLE;
         }
         return;
@@ -232,7 +232,7 @@ void UBAgent::stateLand() {
 void UBAgent::stateMission() {
     static QGeoCoordinate dest;
     QByteArray info;
-    unsigned long int now;
+    qint64 now;
     int hover_time=120;
 
     now = QDateTime::currentMSecsSinceEpoch();
@@ -247,12 +247,13 @@ void UBAgent::stateMission() {
         // hover
         case (1): {
             m_mission_data.tick++;
-            if (m_mission_data.tick%2==0) {
+            if (m_mission_data.tick%20==0) {
 	            // sending information to the logger, this works for tick = half a second
 	            info.clear();
 	            info += QByteArray::number(now/1000.0, 'f', 3);
-	            info += " Seconds passed: ";
+	            info += " seconds passed: ";
 	            info += QByteArray::number(m_mission_data.tick/2);
+	            qInfo() << info;
 	            m_power->sendData(UBPower::PWR_INFO, info);
             }
 
