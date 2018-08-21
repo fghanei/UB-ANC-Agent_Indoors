@@ -19,7 +19,7 @@
 #define TAKEOFF_ALT     5
 #define GPS_ACCURACY    5
 
-#define MISSION_TRACK_DELAY  0.5  //delay in seconds, between iterations 
+#define MISSION_TRACK_DELAY  1
 
 #define SAVE_RATE   5
 

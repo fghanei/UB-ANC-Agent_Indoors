@@ -6,7 +6,6 @@
 class QTimer;
 class Vehicle;
 class UBNetwork;
-class UBPower;
 
 class UBAgent : public QObject
 {
@@ -52,13 +51,12 @@ protected:
             stage = 0;
             tick = 0;
             previousFlightMode = "";
-        }
+ 
     } m_mission_data;
 
 protected:    
     Vehicle* m_mav;
     UBNetwork* m_net;
-    UBPower* m_power;
 
     QTimer* m_timer;
 };
